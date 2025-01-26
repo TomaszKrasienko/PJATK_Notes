@@ -40,6 +40,15 @@ CREATE CLUSTERED INDEX nazwa ON tabela (kolumny)
 ```sql
 CREATE NONCLUSTERED INDEX [nazwa_index'u] ON [tabela_nazwa]([kolumna_nazwa]);
 ```
+## Partycjonowanie tabel
+
+Podzielenie tabeli fizycznie na kilka części. Podział horyzontalny (wiersze). 
+
+- Szybszy dostęp do danych, ponieważ zbiory są mniejsze
+- Przyspieszenie wykonywania zapytań odwołujących się do podzbiorów rekordów
+- Zalecane dla bardzo dużych tabel
+- Wymaga utworzenia funkcji partycjonującej i schematu partycjonowania
+- Wyłącznie zakresowe
 
 ## Indeksowane widoki
 
@@ -56,5 +65,98 @@ GROUP BY Dzial.Nazwa;
 
 -- Tworzenie indeksu na widoku
 CREATE UNIQUE CLUSTERED INDEX idx_MyView ON MyView(Nazwa);
+
+```
+# ORACLE
+
+## Tabela organizowana indeksem
+
+- B+drzewo
+- Na poziomie liści całe wiersze (uporządkowane)
+- Używać:
+    - Gdy tabela ma być uporządkowana według klucza głównego
+    - Dla dużej ilości zapytań SELECT z użyciem klucza głównego
+    - Gdy zapytania bazują na podstawie klucza głównego z klauzulami WHERE i ORDER BY
+    - Gdy tabela posiada unikalne identyfikatory, które są często używane
+- Nie używać
+    - gdy ilość kolumn jest duża
+    - częsta modyfikacja tabel
+    - częste zapytania wykorzystujące inne kolumny niż klucz główny
+- Tylko dla klucza głównego
+
+```sql
+CREATE TABLE table (..) ORGANIZATION INDEX
+```
+
+## Index bitmapowy
+
+- do mało selektywnej kolumny - powtarzają się dane
+
+```sql
+CREATE BITMAP INDEX nazwa ON tabela (kolumna);
+```
+
+## Index funkcyjny (ORACLE)
+
+- przydatny gdy WHERE lub ORDER BY często będzie wyliczany za pomocą deterministycznej funkcji
+
+```sql
+CREATE INDEX t ON test (wartosc2 + id);
+```
+
+## Klastry indeksowe
+
+- Wiele tabel przechowywanych w jednym segmencie
+- Przydatne, gdy tabele są odczytywane razem
+- Znaczne pogorszenie wydajności aktualizacji
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e5d54cb1-c459-4ba8-9baa-5376fe0ae6db/14df398e-cdbc-434b-9aa9-dc27ecb4584f/image.png)
+
+```sql
+CREATE CLUSTER testowy (IdDzial INTEGER);
+CREATE INDEX t ON CLUSTER testowy;
+CREATE TABLE dzial (
+	IdDzial INTEGER PRIMARY KEY,
+	Nazwa VARCHAR2(10))
+CLUSTER testowy(IdDzial);
+CREATE TABLE pracownik (
+	IdPracownik INTEGER PRIMARY KEY,
+	Nazwisko VARCHAR2(20),
+	IdDzial INTEGER REFERENCES dzial)
+CLUSTER testowy(IdDzial);
+```
+
+## Klastry hashowane (ORACLE)
+
+- zamiast indeksu wyszukuje funkcję hashującą
+- dane w klastrze są przechowywane na podstwie jej wyniku
+- funkcja hashująca zwraca liczbę, która jednoznacznie wyznacza miejsce, gdzie przechowywane są dane
+- **dobre dla warunków równościowych**
+
+## Partycjonowanie tabel
+
+Podzielenie tabeli fizycznie na kilka części. Podział horyzontalny (wiersze). 
+
+- Szybszy dostęp do danych, ponieważ zbiory są mniejsze
+- Przyspieszenie wykonywania zapytań odwołujących się do podzbiorów rekordów
+- Zalecane dla bardzo dużych tabel
+- Definiujemy przy tworzeniu tabeli
+- Zakresowe, Listowe, Hashowane, Mieszane
+
+## Perspektywy zmaterializowane
+
+W ORACLE perspektywy zmaterializowane są dostępne.
+
+```sql
+CREATE MATERIALIZED VIEW pm
+BUILD IMMEDIATE
+REFRESH COMPLETE
+ON COMMIT
+WITH PRIMARY KEY
+AS
+SELECT Dzial.Nazwa, COUNT(*) FROM Dzial
+INNER JOIN Pracownik ON Pracownik.IdDzial = Dzial.IdDzial
+GROUP BY Dzial.Nazwa
+ORDER BY 2
 
 ```
