@@ -164,7 +164,7 @@ To zjawisko, gdy wariancja reszt (różnic między wartościami przewidywanymi a
 
 Przeciwieństwem jest heteroskedastyczność - sytuacja gdy wariancja reszt zmienia się systematycznie wraz ze zmianą wartości zmiennej niezależnej.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e5d54cb1-c459-4ba8-9baa-5376fe0ae6db/e5dfeeef-bc72-440e-b832-293f644b34f7/image.png)
+<img src="assets/homo_hetero_skedastycznosc.png"/>
 
 ### 3. Co to jest rozkład normalny danych?
 
