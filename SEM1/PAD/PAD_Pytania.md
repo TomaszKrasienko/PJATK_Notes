@@ -150,7 +150,7 @@ To zjawisko, gdy wariancja reszt (różnic między wartościami przewidywanymi a
 
 Przeciwieństwem jest heteroskedastyczność - sytuacja gdy wariancja reszt zmienia się systematycznie wraz ze zmianą wartości zmiennej niezależnej.
 
-<img src="assets/homo_hetero_skedastycznosc.png"/>
+<img src="Assets/homo_hetero_skedastycznosc.png"/>
 
 ### 3. Co to jest rozkład normalny danych?
 
@@ -158,7 +158,7 @@ Zwany też rozkładem Gaussa. Charakteryzuje się symetrycznym rozkładem wokó�
 co oznacza, że wartości powyżej i poniżej średniej mają równą częstość występowania.
 Ma kształt dzwonu.
 
-<img src="assets/rozkladnormalny.png"/>
+<img src="Assets/rozkladnormalny.png"/>
 
 ### 4. Wariancja
 
