@@ -61,7 +61,8 @@ $H_1$ → Hipoteza alternatywna - zwykle oznacza istnienie efektu lub różnicy,
 
 - miara prawdopodobieństwa uzyskania wyników tak ekstremalnych jak obserwowane, zakładając prawdziwość hipotezę zerową
 
-**P-wartość** → To liczba, która mówi „jak rzadki” jest twój wynik, gdy 
+**P-wartość** → To liczba, która mówi „jak rzadki” jest twój wynik
+
 **α** → To twój próg cierpliwości wobec błędów: jak często możesz zaakceptować, że się mylisz, odrzucając
 
 ## Omówienie Testów
@@ -168,7 +169,40 @@ np
 - 50, 50, 50, 50 - średnia 50, wariancja 0
 - 20, 40, 60, 80 - średnia 50, wariancja duża
 
-### Podsumowanie
-
+## Podsumowanie
 
 <img src="Assets/podsumowanie.png"/>
+
+## Przykłady testów
+### Porównywanie średnich dwóch grup (test t-Studenta)
+
+**Cel**: Sprawdzenie, czy dwie grupy różnią się pod względem średniej jakiejś zmiennej.
+
+**Przykład**: Analiza wyników sprzedaży przed i po wprowadzeniu nowej strategii marketingowej.
+
+- Hipoteza zerowa ($H_0$): Średnia sprzedaż przed i po wprowadzeniu strategii jest taka sama.
+- Hipoteza alternatywna($H_1$): Średnia sprzedaż po wprowadzeniu strategii różni się od sprzedaży wcześniejszej.
+
+### Testowanie proporcji (test Z dla proporcji)
+**Cel**: Sprawdzenie, czy udział jakiejś kategorii w populacji zmienia się w czasie.
+
+**Przykład**: Analiza udziału klientów korzystających z danej promocji.
+
+- $H_0$: Proporcja klientów korzystających z promocji wynosi 30%.
+- $H_1$: Proporcja klientów korzystających z promocji różni się od 30%.
+
+### Analiza wariancji (ANOVA)
+**Cel**: Porównanie średnich więcej niż dwóch grup.
+
+**Przykład**: Sprawdzenie, czy różne kanały reklamowe (TV, social media, radio) mają różny wpływ na wyniki sprzedaży.
+
+- $H_0$: Średnie sprzedaży dla różnych kanałów reklamowych są takie same.
+- $H_1$: Średnie sprzedaży różnią się między kanałami.
+
+### Test Chi-kwadrat dla niezależności
+**Cel**: Sprawdzenie, czy dwie cechy są ze sobą powiązane.
+
+**Przykład**: Analiza związku między płcią klienta a preferencją zakupu (np. wybór kategorii produktu).
+
+- $H_0$: Płeć klienta i preferencja zakupu są niezależne.
+- $H_1$: Płeć klienta i preferencja zakupu są powiązane.
