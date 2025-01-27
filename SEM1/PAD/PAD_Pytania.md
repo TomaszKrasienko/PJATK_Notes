@@ -38,24 +38,7 @@ Dane podzielone na kategorie (np. płeć, kolory)
 - Tabele krzyżowe - prezentacja relacji między zmiennymi kategoriami
 - Test chi-kwadrat - ocena, czy istnieje związek między zmiennymi kategorycznymi
 
-# Techniki modelowania statystycznego
-
-## Regresja liniowa
-
-Modelowanie relacji między zmienną zależną, a niezależnymi.
-
-- Technika, która pozwala opisać zależność między zmienną zależną Y, a jedną lub wieloma zmiennymi niezależnymi (X) (np. sprzedaż na podstawie wydatków na reklamę)
-- Pozwala na przewidywanie przyszłych wartości  (np. jak zmiana temperatury wpływa na sprzedaż lodów)
-- Analizy związków - ocenia siłę i kierunek zależności między zmiennymi
-
-### Dla jakich danych?
-
-- Relacja między zmiennymi jest liniowa - zależność powinna przypominać linię prostą
-- Dane są niezależne
-- Homoskedastyczność - rozrzut błędów powinien być stały w całym zakresie zmiennych niezależnych
-- Rozkład normalny błędów
-
-## *Hipotezy statystyczne*
+# *Hipotezy statystyczne*
 
 Hipoteza statystyczna to założenie lub stwierdzenie dotyczące właściwości populacji, które jest weryfikowane za pomocą danych próbkowych.
 
@@ -77,6 +60,9 @@ $H_1$ → Hipoteza alternatywna - zwykle oznacza istnienie efektu lub różnicy,
 ### P-wartość
 
 - miara prawdopodobieństwa uzyskania wyników tak ekstremalnych jak obserwowane, zakładając prawdziwość hipotezę zerową
+
+**P-wartość** → To liczba, która mówi „jak rzadki” jest twój wynik, gdy 
+**α** → To twój próg cierpliwości wobec błędów: jak często możesz zaakceptować, że się mylisz, odrzucając
 
 ## Omówienie Testów
 
@@ -111,7 +97,7 @@ Gdy chcemy porównać więcej niż dwie grupy.
     - **Test F**: Porównuje rozrzut danych w grupach, aby sprawdzić, czy różnią się istotnie.
     - **ANOVA**: Ocenia, czy średnie wartości w wielu grupach są różne (np. czy średni czas snu różni się między trzema grupami: studentami, pracownikami i emerytami).
 
-# Modelowanie
+# Techniki modelowania statystycznego
 
 ### Czym jest modelowanie?
 
