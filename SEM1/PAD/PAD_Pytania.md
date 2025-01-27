@@ -172,7 +172,7 @@ Zwany też rozkładem Gaussa. Charakteryzuje się symetrycznym rozkładem wokó�
 co oznacza, że wartości powyżej i poniżej średniej mają równą częstość występowania.
 Ma kształt dzwonu.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e5d54cb1-c459-4ba8-9baa-5376fe0ae6db/2ea1a946-1402-4769-a45f-9ac8804a4324/image.png)
+<img src="assets/rozkladnormalny.png"/>
 
 ### 4. Wariancja
 
