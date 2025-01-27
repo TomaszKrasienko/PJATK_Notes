@@ -167,3 +167,8 @@ np
 
 - 50, 50, 50, 50 - średnia 50, wariancja 0
 - 20, 40, 60, 80 - średnia 50, wariancja duża
+
+### Podsumowanie
+
+
+<img src="Assets/podsumowanie.png"/>
