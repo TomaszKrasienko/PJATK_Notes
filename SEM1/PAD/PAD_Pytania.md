@@ -67,16 +67,21 @@ $H_1$ → Hipoteza alternatywna - zwykle oznacza istnienie efektu lub różnicy,
 
 ## Omówienie Testów
 
-### **Test Z:**
+### Test Z:
 
-- **Kiedy używamy?**
-    - Przy dużej próbie (**30 lub więcej obserwacji**) i znanym odchyleniu standardowym populacji.
-    - Przykład: Sprawdzamy, czy średnia dochodów w dużej próbie osób odpowiada średniej ogólnokrajowej.
+**Kiedy używamy?**
+
+Używamy, gdy chcemy porównać **średnią próby** (np. grupa ludzi - klasa) ze **średnią populacyjną**, ale działa najlepiej gdy znamy odchylenie w populacji (**odchylenie standardow**).
+
+**Przykład**:
+- sprawdzenie średniego wzrostu uczniów w klasie vs. średni wzrost wszystkich ludzi, zakładając, że znamy odchylenie standardowe, czyli jak bardzo ten wzrost się różni
+
 
 ### Test T (T-student):
 
-- **Kiedy używamy?**
-Gdy mamy małą próbkę (**30 lub mniej obserwacji**) lub nie znamy rozrzutu w populacji.
+**Kiedy używamy?**
+
+Gdy mamy małą próbkę lub nie znamy rozrzutu w populacji.
 - **Rodzaje testów T**:
     - **Test T dla jednej próbki**: Porównujemy średnią próbki z konkretną wartością (np. czy średnia temperatura grupy jest równa 36,6°C).
     - **Test T dla dwóch niezależnych próbek**: Sprawdzamy, czy średnie w dwóch niezależnych grupach się różnią (np. średni wzrost kobiet vs mężczyzn).
@@ -84,19 +89,31 @@ Gdy mamy małą próbkę (**30 lub mniej obserwacji**) lub nie znamy rozrzutu w 
 
 ### Test chi-kwadrat
 
-- **Kiedy używamy?**
+**Kiedy używamy?**
+
 Do analizy zmiennych jakościowych (np. płeć, kolor włosów).
 - **Rodzaje zastosowań**:
     - **Test zgodności**: Sprawdzamy, czy rozkład danych w próbce pasuje do oczekiwanego (np. czy liczba osób o różnych grupach krwi odpowiada teoretycznym proporcjom).
     - **Test niezależności**: Sprawdzamy, czy dwie zmienne jakościowe są ze sobą powiązane (np. czy płeć wpływa na preferencję ulubionego koloru).
 
-### Test F i ANOVA
+### Test ANOVA (wariancji)
+
+**Kiedy używamy?**
+
+Służy do porównania średnich w więcej niż dwóch grupach.Zakłada, że dane są normalnie rozłożone, a wariancje są jednorodne.
+
+**Przykład:**
+
+Porównanie średniego czasu reakcji kierowców, którzy spożywali trzy różne rodzaje napojów energetycznych
+
+### Test F
 
 - **Kiedy używamy?**
-Gdy chcemy porównać więcej niż dwie grupy.
-- **Do czego służy?**
-    - **Test F**: Porównuje rozrzut danych w grupach, aby sprawdzić, czy różnią się istotnie.
-    - **ANOVA**: Ocenia, czy średnie wartości w wielu grupach są różne (np. czy średni czas snu różni się między trzema grupami: studentami, pracownikami i emerytami).
+Gdy chcemy porównać wariancję w więcej niż dwóch grupach. Często stosowany jako część ANOVA, aby sprawdzić jednorodność wariancji.
+
+**Przykład:**
+
+Użycie testu F w ANOVIE do sprawdzenia czy wariancje są jednorodne.
 
 # Techniki modelowania statystycznego
 
