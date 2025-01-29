@@ -59,7 +59,7 @@ $H_1$ → Hipoteza alternatywna - zwykle oznacza istnienie efektu lub różnicy,
 
 ### P-wartość
 
-- miara prawdopodobieństwa uzyskania wyników tak ekstremalnych jak obserwowane, zakładając prawdziwość hipotezę zerową
+- wartość, która mówi nam czy możemy odrzucić hipotezę zerową czy nie. 
 
 **P-wartość** → To liczba, która mówi „jak rzadki” jest twój wynik
 
