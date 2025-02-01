@@ -84,3 +84,14 @@ CREATE NONCLUSTERED INDEX [nazwa_index'u] ON [tabela_nazwa]([kolumna_nazwa]);
 ```sql
 CREATE NONCLUSTERED INDEX [nazwa_index'u] ON [tabela_nazwa]([kolumna_nazwa], [kolumna_nazwa]);
 ```
+
+
+
+```sql
+--CREATE NONCLUSTERED INDEX idx_test2_IdTest ON test2(IdTest);
+ALTER TABLE [dbo].[test2] DROP CONSTRAINT [PK__test2__3214EC0732409DC6] WITH ( ONLINE = OFF )
+ALTER TABLE [dbo].[test2] DROP CONSTRAINT [FK__test2__IdTest__4E88ABD4]
+ALTER TABLE test2
+ADD CONSTRAINT PK_test2 PRIMARY KEY NONCLUSTERED (Id);
+CREATE CLUSTERED INDEX idx_test2_IdTest ON test2(IdTest);
+```
