@@ -58,7 +58,7 @@ $H_1$ → Hipoteza alternatywna - zwykle oznacza istnienie efektu lub różnicy,
 - zwykle 0.05 reprezentuje tolerancje dla błędu pierwszego rodzaju (odrzucenie prawdziwej hipotezy zerowej
 
 ### P-wartość
-
+- prawdopodobieństwo popełnienia błędu pierwszego rodzaju
 - wartość, która mówi nam czy możemy odrzucić hipotezę zerową czy nie. 
 
 **P-wartość** → To liczba, która mówi „jak rzadki” jest twój wynik
