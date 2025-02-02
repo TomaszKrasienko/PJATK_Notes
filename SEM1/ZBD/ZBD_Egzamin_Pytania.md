@@ -19,7 +19,7 @@ Dane w aplikacji powinny być odizolowane od tego, jaką logiczną strukturę ma
 
 Na poziomach zewnętrznych należy używać perspektyw i funkcji/procedur składowanych - nie tabel.
 
-- Ma na celu spójnego, bezpiecznego i elastycznego dostępu do danych
+- Ma to na celu zapewnienie spójnego, bezpiecznego i elastycznego dostępu do danych
 - Ukrycie szczegółów implementacyjnych i struktury bazy
 
 ---
