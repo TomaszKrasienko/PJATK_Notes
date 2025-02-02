@@ -241,9 +241,11 @@ Dwa alternatywne formaty (#pól jest stała)
 
 ---
 
-## 13. Realizacja wyszukiwania rekordów po kluczu wyszukiwani
+## 13. Realizacja wyszukiwania rekordów po kluczu wyszukiwania
 
-NIE WIEM!
+*z chata*
+
+- Realizacja wyszukiwania rekordów po kluczu wyszukiwania w SQL może być wykonana za pomocą zapytań wykorzystujących indeksowane kolumny, zwłaszcza klucze główne (PRIMARY KEY) i indeksy unikalne (UNIQUE). Najczęściej stosowaną instrukcją jest `SELECT` z warunkiem `WHERE`. Wyszukiwanie może również odbywać się na podstawie kluczy obcych (FOREIGN KEY), jeśli zapytanie łączy dane z różnych tabel
 
 ---
 
@@ -410,7 +412,7 @@ Wyniki transakcji są stale przechowywane w systemie, nawet w przypadku awarii o
 
 ---
 
-## 24. Mechanizmy współdzielenia zasobów bazy danych
+## 25. Mechanizmy współdzielenia zasobów bazy danych
 
 ### Blokady
 
@@ -430,7 +432,7 @@ Dostęp do różnych czasowych wersji tych samych danych - umożliwia odczytywan
 
 ---
 
-## 25. Protokół ścisłego blokowania dwufazowego (2PL)
+## 26. Protokół ścisłego blokowania dwufazowego (2PL)
 
 - Każda transakcja musi uzyskać blokadę S (współdzieloną) na obiekcie zanim odczyta ten obiekt oraz blokadę X (wyłączną) na obiekcie przed zapisaniem go.
 - Jeśli transakcja trzyma blokadę X na obiekcie, żadna inna transakcja nie może założyć żadnej innej blokady (ani S ani X) na tym obiekcie
@@ -442,13 +444,13 @@ Dostęp do różnych czasowych wersji tych samych danych - umożliwia odczytywan
 
 ---
 
-## 26.Problem fantomów
+## 27.Problem fantomów
 
 Inaczej (duch) - wiersz, którego nie było w tabeli na początku wykonywania transakcji obliczającej zapytanie na tabeli, a który został wprowadzony przez inną zatwierdzoną transakcję w trakcie wykonywania rozważanej transakcji.
 
 ---
 
-## 27. Poziomy izolacji
+## 28. Poziomy izolacji
 
 ### Read uncommited
 
@@ -470,13 +472,13 @@ Najwyższy poziom izolacji, w którym transakcje są wykonywane tak, jakby były
 
 ---
 
-## 28. Wielowersyjność w bazie danych (MVCC)
+## 29. Wielowersyjność w bazie danych (MVCC)
 
 (Z chata) Technika zarządzania współbieżnym dostępem do danych, która pozwala na przechowywanie wielu wersji tych samych danych w celu zapewnienia spójności i izolacji transakcji, minimalizując jednocześnie ryzyko blokad i zapewniając wysoką wydajność.
 
 ---
 
-## 29. Dziennik transakcji
+## 30. Dziennik transakcji
 
 - rejestruje wszystkie zmiany zachodzące w bazie danych
 - dokonuje się regularnie jego archiwizacji (Backup)
@@ -484,25 +486,119 @@ Najwyższy poziom izolacji, w którym transakcje są wykonywane tak, jakby były
 
 ---
 
-## 30. Realizacja odtwarzania po awarii serwera
+## 31. Realizacja odtwarzania po awarii serwera
 
-Nie mogę tego znaleźć
+*z chata*
+
+- Odtwarzanie po awarii serwera polega na wykorzystaniu mechanizmu **Write-Ahead Logging (WAL)** (zmiany w bazie danych są najpierw zapisywane w dzienniku transakcji, a dopiero potem w plikach danych na dysku). W przypadku awarii, system bazodanowy stosuje techniki **roll-forward recovery i redo/undo**, aby przywrócić spójny stan bazy. Dodatkowe zabezpieczenia, takie jak replikacja, snapshoty i backupy, zwiększają niezawodność systemu.
+
+- Proces odtwarzania po awarii:
+    - Analiza dziennika transakcji – sprawdzenie, które operacje zostały zatwierdzone, a które były w trakcie wykonania.
+    - Powtórzenie zatwierdzonych operacji (redo) – odtworzenie zmian, które były zapisane w dzienniku transakcji, ale jeszcze nie znalazły się w bazie.
+    - Cofnięcie niezakończonych operacji (undo) – anulowanie transakcji, które nie zostały zatwierdzone przed awarią.
 
 ---
 
-## 31. Realizacja odtwarzania po awarii dysku
+## 32. Realizacja odtwarzania po awarii dysku
 
 - Gdy nastąpi awaria dysku z danymi, rekordy dziennika transakcji zastosowane do backupu bazy danych pozwalają odtworzyć stan bazy danych w chwili awarii
 - W dzienniku transakcji są również zapisane informacje potrzebne do wycofania transakcji, można wycofać niezatwierdzone transakcje, których działanie zostało przerwane z powodu awarii
 
 ---
 
-## 32. Rezerwowa baza danych (standby)
+## 33. Rezerwowa baza danych (standby)
 
-Nie mogę znaleźć
+- Dodatkowa instalacja bazy danych na osobnym komputerze. 
+- Odtwarzanie danych na bieżąco z kopii dziennika transakcji generowanego przez główną bazę.
+- Może służyć do zapewnienia wydajności poprzez obsługę zapytań SELECT, raportów i analiz.
+- W przypadku awarii dysku lub katastrony dotyczących głównej bazy danych, rezerwowa baza danych przechodzi z trybu *stand-by* w tryb *read-write* i przejmuje obowiązki głównej bazy danych.
+- Może być użyta podczas prac serwisowych nad główną bazą.
 
 ---
 
-## 33. Realizacja rozproszonych baz danych w Oracle
+## 34. Protokół dwu-fazowego zatwierdzania (2PC)
 
-Nie mogę znaleźć
+- Cel: Zapewnienie atomowości transakcji rozproszonych.
+- Koordynator: Węzeł inicjujący transakcję, zarządza procesem zatwierdzania.
+
+### Fazy:
+
+#### Faza przygotowania (Prepare):
+
+- Koordynator wysyła do węzłów komunikat prepare.
+- Węzły zapisują w dzienniku rekord prepare i odpowiadają yes (gotowość) lub no (brak gotowości).
+
+#### Faza zatwierdzenia (Commit/Abort):
+
+- Jeśli wszystkie węzły odpowiedzą yes, koordynator zapisuje commit w dzienniku i wysyła komunikat commit.
+- Jeśli którykolwiek węzeł odpowie no, koordynator zapisuje abort i wysyła abort.
+- Węzły zapisują commit/abort w dzienniku, wykonują odpowiednie działania (zatwierdzają lub wycofują zmiany) i wysyłają potwierdzenie ack.
+- Koordynator kończy transakcję po otrzymaniu wszystkich ack, zapisując end w dzienniku.
+
+#### Kluczowe cechy:
+
+- Dwie rundy komunikacji: głosowanie (prepare) i kończenie (commit/abort).
+- Liberum veto: Każdy węzeł może zablokować transakcję, odpowiadając no.
+- Odporność na awarie: Decyzje są zapisywane w dzienniku przed wysłaniem komunikatów.
+- Domyślne wycofanie: Brak rekordu w pamięci RAM oznacza wycofanie transakcji.
+
+#### Wady:
+
+- Blokady w przypadku awarii koordynatora lub węzłów.
+- Złożoność komunikacyjna i czasowa.
+
+---
+
+## 35. Realizacja rozproszonych danych w Oracle
+
+- Oracle dostarcza oprogramowanie sieciowe  umożliwiające komunikację między bazami danych oraz obsługę transakcji działających na więcej niż jednej bazie danych (w tym zatwierdzanie transakcji i ich wycofywanie).
+- Opcja Oracle Sharding wspomaga tworzenie rozproszonej bazy danych na zbiorze węzłów sieciowych zawierających serwery baz danych w tym dodawanie nowych węzłów (tabele są partycjonowane i/lub replikowane między węzłami).
+
+---
+
+## 36. Problem integracji danych
+
+- Problem integracji danych polega na połączeniu i spójnym wykorzystaniu danych pochodzących z różnych źródeł, które mogą różnić się pod wieloma względami.
+
+### Główne przyczyny problemu:
+
+- Różne lokalizacje danych: Powiązane dane są przechowywane w różnych miejscach, ale mogą być potrzebne jednocześnie przez jedną aplikację.
+- Potrzeba integracji po połączeniu firm: Np. scalenie baz danych po fuzji lub przejęciu przedsiębiorstw.
+
+- Różnorodność baz danych:
+    - Modele danych: relacyjne, obiektowo-relacyjne, hierarchiczne, XML, pliki Excel itp.
+    - Schematy: znormalizowane vs. nieznormalizowane.
+    - Terminologia: np. różne definicje "pracownika" (konsultanci, emeryci).
+    - Konwencje: różne jednostki miary (Celsjusz vs. Fahrenheit, mile vs. kilometry).
+
+### Rozwiązanie:
+
+- Rozproszona baza danych: Integruje dane z wielu źródeł, zapewniając jednolity dostęp i spójność.
+- Narzędzia integracyjne: ETL (Extract, Transform, Load), middleware, systemy zarządzania metadanymi.
+
+---
+
+## 37. Zapytania temporalne (retrospektywne)
+
+- Zapytania temporalne umożliwiają dostęp do danych według stanu bazy danych z przeszłości. Pozwalają na odczytanie informacji, które zostały zmienione lub usunięte.  
+
+#### Zastosowanie: 
+- **Analiza danych:** Badanie historycznych stanów danych.  
+- **Naprawa błędów:** Odzyskiwanie danych błędnie wprowadzonych, zmienionych lub usuniętych.  
+
+**Przykład (Oracle):**  
+Aby wyświetlić dane sprzed godziny:  
+```sql
+SELECT * FROM Emp  
+AS OF TIMESTAMP(SYSDATE - 1/24);  
+```
+
+**Tabele temporalne:**  
+- Specjalne tabele przechowujące historię zmian danych.  
+- Umożliwiają automatyczne śledzenie wersji danych w czasie.  
+
+**Korzyści:**  
+- Łatwy dostęp do historycznych danych bez ręcznego zarządzania wersjami.  
+- Przydatne w audycie, analizie trendów i przywracaniu danych.
+
+---
