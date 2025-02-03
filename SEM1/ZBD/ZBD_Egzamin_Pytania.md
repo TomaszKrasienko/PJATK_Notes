@@ -329,8 +329,8 @@ Dwa alternatywne formaty (#pól jest stała)
 ### Indeks bitmapowy (ORACLE)
 
 - przykład:
-    
-    ![IPB - Page 10.png](attachment:c161a946-655b-42e9-803f-ca7b774eb190:IPB_-_Page_10.png)
+
+<img src="Assets/indeks_bitmapowy.png"/>
     
 - zapytania z WHERE sprowadzają się do operacji na wektorach bitowych ( WHERE 10010 AND 10001)
 
