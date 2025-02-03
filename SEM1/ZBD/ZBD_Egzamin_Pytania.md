@@ -330,7 +330,7 @@ Dwa alternatywne formaty (#pól jest stała)
 
 - przykład:
 
-    <img src="indeks_bitmapowy"/>
+<img src="Assets/indeks_bitmapowy"/>
     
 - zapytania z WHERE sprowadzają się do operacji na wektorach bitowych ( WHERE 10010 AND 10001)
 
