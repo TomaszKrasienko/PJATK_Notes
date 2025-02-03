@@ -254,7 +254,7 @@ Dwa alternatywne formaty (#pól jest stała)
 - operacje:
     - wstawienie/usunięcie/zmodyfikowanie rekordu
     - odczytanie konkretnego rekordu
-    - wyszukanie wszystkich rekordów spełniające podane warunki
+    - wyszukanie wszystkich rekordów spełniających podane warunki
 
 ### Plik nieuporządkowany (sterta, heap)
 
