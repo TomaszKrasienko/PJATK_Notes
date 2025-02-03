@@ -319,11 +319,11 @@ Dwa alternatywne formaty (#pól jest stała)
 
 ## 15. Składowanie danych kolumnami, indeks kolumnowy, indeks bitmapowy
 
-### Składanie danych kolumnami
+### Składowanie danych kolumnami
 
 - dane są czytane tylko z wybranych kolumn, co zmniejsza liczbę operacji we/wy
 - gdy dane powtarzają się w kolumnie, możliwość kompresji i zmniejszenia ilości miejsca do zapisu
-- podejście hybrydowe - zapis całej tabli wierszami na dysku, a w pamięci RAM zapis kilku kolumn do analizy wartości w nich.
+- podejście hybrydowe - zapis całej tabeli wierszami na dysku, a w pamięci RAM zapis kilku kolumn do analizy wartości w nich.
 - taki zapis kolumnowy jest nazywany indeksem kolumnowym
 
 ### Indeks bitmapowy (ORACLE)
