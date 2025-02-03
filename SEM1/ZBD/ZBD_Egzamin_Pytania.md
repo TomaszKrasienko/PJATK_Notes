@@ -141,11 +141,11 @@ CREATE TABLE Klienci (
 
 ### Typ obiektowy XML
 
-Wbudowany typ obiektowy - najczęstsze zastosowania “obiektów” w bazie danych. Dla niego specjalne indeksy “ścieżkowe” - umożliwiające wyszukiwanie danych wewnątrz dokumentu XML.
+Wbudowany typ obiektowy - najczęstsze zastosowania “obiektów” w bazie danych. Są dla niego specjalne indeksy “ścieżkowe” - umożliwiające wyszukiwanie danych wewnątrz dokumentu XML.
 
 Zastosowania: 
 
-- W bazie danych zapisanie obok siebie na dysku powiązanych danych w celu przyśpieszenia do nich dostępu w postaci paczki danych.
+- Zapisanie w bazie danych obok siebie na dysku powiązanych danych pozwala na szybszy dostęp do danych w postaci paczki danych.
 - Integracja danych pochodzących z różnych baz danych i aplikacji.
 - Ułatwienie wymiany danych biznesowych między aplikacjami i bazami danych, w szczególności między bazą danych i przeglądarką.
 
@@ -155,12 +155,12 @@ Zastosowania:
 
 ### Dyskowy model fizyczny w ORACLE
 
-- gdy rozmiar rekordu jest większy niż rozmiar strony rekord dzielony jest na części przechowywane na osobnych stronach
-- gdy schemat dostępu do danych polega na użyciu powiązanych danych z dwóch lub więcej tabel w jednym miejscu na dysku są zbierane dane z kilku tabel w oparciu o wspólny klucz - jak w bazach hierarchicznych
+- gdy rozmiar rekordu jest większy niż rozmiar strony to rekord dzielony jest na części przechowywane na osobnych stronach
+- gdy schemat dostępu do danych polega na użyciu powiązanych danych z dwóch lub więcej tabel to w jednym miejscu na dysku są zbierane dane z kilku tabel w oparciu o wspólny klucz - jak w bazach hierarchicznych
 
 ### Dyskowy model fizyczny w MSSQL Server
 
-- ograniczenia rozmiaru każdego rekordu do 8kB
+- ograniczenie rozmiaru każdego rekordu do 8kB
 - system stara się trzymać cały rekord na jednej stronie
 - jeśli po modyfikacji rekord przestaje mieścić się na stronie, nie mieszcząca się część rekordu zostaje zapisana na liście stron nadmiarowych, a wskaźnik do strony nadmiarowej zostaje zapisany w rekordzie
 
@@ -176,7 +176,7 @@ Podstawowe realizowane funkcje:
 - Odczyt/zapis strony o podanym adresie
 - Wyznaczenie strony do zapisu nowego rekordu
 
-Strukturą danych organizującą dostę do stron i ekstentów w pliku są bitmapy (wektory bitów) zapisywane w pliku razem z danymi. Dotyczy to:
+Strukturą danych organizującą dostęp do stron i ekstentów w pliku są bitmapy (wektory bitów) zapisywane w pliku razem z danymi. Dotyczy to:
 
 - alokowanych i wolnych ekstentów
 - stron zajętych przez dany obiekt bazodanowy
@@ -185,8 +185,8 @@ Strukturą danych organizującą dostę do stron i ekstentów w pliku są bitmap
 
 Proces serwera realizujący zlecenie użytkownika chce uzyskać dostęp do strony z danymi.
 
-- Dane muszą być w RAM, aby serwer mógł na nim operować
-- Pomocnicza struktura danych: tablica hashowana po identyfikatorze strony do sprawdzenia, czy i gdzie strona znajduje się w puli buforów
+- Dane muszą być w RAM, aby serwer mógł na nich operować
+- Pomocnicza struktura danych: tablica hashowana po identyfikatorze strony do sprawdzania czy i gdzie strona znajduje się w puli buforów
 
 Dla każdego bufora 
 
@@ -224,11 +224,12 @@ Strona w buforze może być używana przez wiele procesów:
 
 ### Rekordy
 
-**Stała długość pół**
+**Stała długość pół** - 
 Rozmiary pól takie same dla wszystkich rekordów w pliku - zapisane w katalogu systemowym
 
 <img src="Assets/rekord_stala_dlugosc.png"/>
-**Zmienna długość pól**
+
+**Zmienna długość pól** - 
 Dwa alternatywne formaty (#pól jest stała)
 
 <img src="Assets/rekord_zmienna_dlugosc.png"/>
