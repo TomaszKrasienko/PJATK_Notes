@@ -312,7 +312,7 @@ Dwa alternatywne formaty (#pól jest stała)
 ### Indeks niepogrupowany
 
 - w liściach indeksu niepogrupowanego znajdują się
-    - gdy na tabli nie ma indeksu pogrupowanego - adresy do rekordów
+    - gdy na tabeli nie ma indeksu pogrupowanego - adresy do rekordów
     - gdy na tabeli jest indeks pogrupowany - wartości klucza pogrupowanego
 
 ---
