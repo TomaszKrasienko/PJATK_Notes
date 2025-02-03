@@ -106,14 +106,22 @@ Wywoływane przez system przy zajściu odpowiedniego zdarzenia, które może by�
 *(Z chata)* 
 - Możliwość utworzenia kolumny z typem obiektowym, który umożliwia tworzenie zdefiniowanie złożonych struktur.
 
-- Chodzi o to że możemy tworzyć własne typy danych:
+- Chodzi o to że możemy tworzyć własne typy danych. Jest tu też dziedziczenie i inne dziwne opcje ale nie ma co się zagłębiać:
 ``` sql
-CREATE TYPE TypyAut AS VARRAY(3) OF VARCHAR2(20);
-CREATE TABLE Kierowcy (
+CREATE TYPE Adres AS OBJECT (
+    Ulica VARCHAR2(100),
+    Miasto VARCHAR2(50),
+    Kod_Pocztowy VARCHAR2(10)
+);
+
+CREATE TABLE Klienci (
     ID NUMBER PRIMARY KEY,
     Imie VARCHAR2(50),
-    Samochody TypyAut
+    DaneAdresowe Adres  -- Kolumna przechowująca obiekt typu Adres
 );
+
+
+
 ```
 - W mssql tego nie ma.
 
