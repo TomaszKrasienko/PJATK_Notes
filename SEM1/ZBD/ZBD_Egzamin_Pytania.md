@@ -95,7 +95,7 @@ Metadane czyli dane o schematach obiektów bazy danych.
 
 ## 5. Wyzwalacze w bazie danych
 
-Wiązanie z użyciem jednego z obiektów tabeli, perspektywy, schematy, bazy danych.
+Wiązane z użyciem jednego z obiektów: tabeli, perspektywy, schematy, bazy danych.
 
 Wywoływane przez system przy zajściu odpowiedniego zdarzenia, które może być zdarzeniem systemowym abo realizacją na obiekcie jednej z instrukcji SQL.
 
@@ -103,7 +103,19 @@ Wywoływane przez system przy zajściu odpowiedniego zdarzenia, które może by�
 
 ## 6. Obiektowo-relacyjny model danych w bazie danych Oracle
 
-(Z chata) Możliwość utworzenia kolumny z typem obiektowym, który umożliwia tworzenie zdefiniowanie złożonych struktur.
+*(Z chata)* 
+- Możliwość utworzenia kolumny z typem obiektowym, który umożliwia tworzenie zdefiniowanie złożonych struktur.
+
+- Chodzi o to że możemy tworzyć własne typy danych:
+``` sql
+CREATE TYPE TypyAut AS VARRAY(3) OF VARCHAR2(20);
+CREATE TABLE Kierowcy (
+    ID NUMBER PRIMARY KEY,
+    Imie VARCHAR2(50),
+    Samochody TypyAut
+);
+```
+- W mssql tego nie ma.
 
 ---
 
