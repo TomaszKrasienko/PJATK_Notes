@@ -439,8 +439,7 @@ Serwer bazy danych ORACLE składa się z:
     - wykonujących cyklicznie działania serwera jak zapisywanie zmienionych danych na dysk
     
 
-![image.png](attachment:9f80909d-a67c-4531-bf1c-2485b810ab79:image.png)
-
+<img src="Assets/serwer_oracle.png"/>
 ---
 
 ## 24. Aksjomaty ACID współbieżnego wykonywania transakcji
