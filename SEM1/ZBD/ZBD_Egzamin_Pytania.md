@@ -277,7 +277,7 @@ Dwa alternatywne formaty (#pól jest stała)
     - lista stron = rekordy uporządkowane wg wartości klucza
         - łatwe wstawienie nowego rekordu do pliku (gdy znane miejsce)
         - nie można bezpośrednio zastosować wyszukiwania binarnego
-    - lista stron z indeksem - kompromis - rekordy uporządkowane wg wartości klucza. W indeksie dla każdej strony zapisany najmniejszy klucz rekordu na niej i jej adres
+    - lista stron z indeksem - kompromis - rekordy uporządkowane wg wartości klucza. W indeksie dla każdej strony zapisany jest najmniejszy klucz rekordu i jej adres
         - ułatwione wyszukiwanie.
         - łatwe wstawienie nowego rekordu i usunięcie
 
