@@ -176,19 +176,18 @@ Strona w buforze może być używana przez wiele procesów:
 **Stała długość pół**
 Rozmiary pól takie same dla wszystkich rekordów w pliku - zapisane w katalogu systemowym
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e5d54cb1-c459-4ba8-9baa-5376fe0ae6db/23a33d9b-407d-432d-9501-1adc6d45859b/image.png)
-
+<img src="Assets/rekord_stala_dlugosc.png"/>
 **Zmienna długość pól**
 Dwa alternatywne formaty (#pól jest stała)
 
-![IPB - Page 11.png](attachment:6d20f748-dc79-4481-886a-c60adef5b31f:IPB_-_Page_11.png)
+<img src="Assets/rekord_zmienna_dlugosc.png"/>
 
 - W drugim przypadku bezpośredni dostęp do wartości i-tego pola
 - Format mieszany - każdy rekord składa się z dwóch części - stałego i zmiennego rozmiaru (SQL Server)
 
 ### Strony
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e5d54cb1-c459-4ba8-9baa-5376fe0ae6db/7d8f0c9a-0463-48bf-a7b4-b124e0866788/image.png)
+<img src="Assets/strony.png"/>
 
 - Identyfikator rekordu rid = id strony, nr rekordu w tablicy pozycji
 - Można przesuwać rekordy na stronie aktualizując wartości w tablicy pozycji bez konieczności zmiany identyfikatorów rekordów
