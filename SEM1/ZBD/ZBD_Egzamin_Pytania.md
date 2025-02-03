@@ -26,7 +26,7 @@ Na poziomach zewnętrznych należy używać perspektyw i funkcji/procedur skład
 
 ## **3. Instrukcje SQL z klauzulą WITH**
 
-Opcja “WITH CHECK OPTION” przy **INSERT** i **UPDATE** następuje sprawdzenie, czy wstawiany warunek bądź modyfikowany wiersz spełnia warunek w klauzuli **WHERE**
+Opcja “WITH CHECK OPTION” przy **INSERT** i **UPDATE** następuje sprawdzenie, czy wstawiany bądź modyfikowany wiersz spełnia warunek w klauzuli **WHERE**
 
 - Jeśli spełnia, operacja jest wykonywana
 - Jeśli nie spełnia, operacja nie zostanie wykonana
