@@ -438,7 +438,7 @@ Serwer bazy danych ORACLE składa się z:
     - realizujących zlecenia użytkowników
     - wykonujących cyklicznie działania serwera jak zapisywanie zmienionych danych na dysk
     
-<img src="Assets/serwer_oracle.png"/>
+<img src="Assets/server_oracle.png"/>
 
 ---
 
