@@ -90,7 +90,7 @@ Wywoływane przez system przy zajściu odpowiedniego zdarzenia, które może by�
 
 ### Typ obiektowy XML
 
-Wbudowany typ obiektowy - najczęstsze zastosowania “obiektów” w bazie danych. Dla niego specjalne “ścieżkowe” - umożliwiające wyszukiwanie danych wewnątrz dokumentu XML.
+Wbudowany typ obiektowy - najczęstsze zastosowania “obiektów” w bazie danych. Dla niego specjalne indeksy “ścieżkowe” - umożliwiające wyszukiwanie danych wewnątrz dokumentu XML.
 
 Zastosowania: 
 
