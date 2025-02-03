@@ -49,6 +49,37 @@ SET sal = 10000
 WHERE ename = 'KOWALSKI';
 ```
 
+*Lokalne perspektywy (inline views) (albo CTE)*
+Lokalne perspektywy to tymczasowe widoki definiowane za pomocą klauzuli WITH, widoczne tylko w obrębie jednej instrukcji SQL. Umożliwiają modularne programowanie w SQL, upraszczając złożone zapytania.
+
+```sql
+WITH SredniePensje AS (
+    SELECT Dzial, AVG(Pensja) AS SredniaPensja
+    FROM Pracownicy
+    GROUP BY Dzial
+)
+SELECT p.Imie, p.Dzial, p.Pensja
+FROM Pracownicy p
+JOIN SredniePensje sp ON p.Dzial = sp.Dzial
+WHERE p.Pensja > sp.SredniaPensja;
+```
+
+With można użyć też w zapytaniu **SELECT**
+
+```sql
+SELECT ID, Imie, Pensja 
+FROM Pracownicy WITH (NOLOCK) 
+WHERE Pensja > 5000;
+
+```
+Dostępne opcje:
+- NOLOCK – pozwala czytać dane bez blokowania (mogą być niezatwierdzone zmiany).
+- HOLDLOCK – działa jak SERIALIZABLE, blokuje cały zakres danych do końca transakcji.
+- UPDLOCK – blokada aktualizacyjna (przydatne w SELECT ... FOR UPDATE).
+- TABLOCK – blokada całej tabeli.
+- READPAST – pomija zablokowane wiersze.
+- ROWLOCK – blokuje tylko pojedyncze wiersze.
+
 ---
 
 ## 4. Katalog (słownik) systemowy (danych)
