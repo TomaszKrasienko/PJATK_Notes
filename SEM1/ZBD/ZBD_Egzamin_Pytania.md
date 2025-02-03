@@ -104,7 +104,7 @@ Wywoływane przez system przy zajściu odpowiedniego zdarzenia, które może by�
 ## 6. Obiektowo-relacyjny model danych w bazie danych Oracle
 
 *(Z chata)* 
-- Możliwość utworzenia kolumny z typem obiektowym, który umożliwia tworzenie zdefiniowanie złożonych struktur.
+- Możliwość utworzenia kolumny z typem obiektowym, który umożliwia tworzenie złożonych struktur.
 
 - Chodzi o to że możemy tworzyć własne typy danych. Jest tu też dziedziczenie i inne dziwne opcje ale nie ma co się zagłębiać:
 ``` sql
