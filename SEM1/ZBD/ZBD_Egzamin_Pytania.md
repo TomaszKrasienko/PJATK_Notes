@@ -505,11 +505,11 @@ Inaczej (duch) - wiersz, którego nie było w tabeli na początku wykonywania tr
 
 ### Read uncommited
 
-Umożliwienie innej transakcji czytania danych niezauktualizowanych/niezatwiedzonych. Dane blokowane tylko podczas update’u. Brak blokad ustawionych na danych przygotowywanych do zmiany.
+Umożliwienie innej transakcji czytania danych niezauktualizowanych/niezatwiedzonych. Dane blokowane tylko podczas update’u. Brak ustawionych blokad na danych przygotowywanych do zmiany.
 
 ### Read commited
 
-Transakcje mogą odczytywać tylko dane, które zostały zatwierdzone przez inne transakcji. Zapewnia to, że transakcje nie będą odczytywać brudnych danych.
+Transakcje mogą odczytywać tylko dane, które zostały zatwierdzone przez inne transakcje. Zapewnia to, że transakcje nie będą odczytywać brudnych danych.
 Może dochodzić do niespójnych odczytów, kiedy ta sama transakcja odczytuje różne wartości tego samego rekordu.
 
 ### Repeatable read
