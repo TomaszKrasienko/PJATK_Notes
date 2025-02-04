@@ -562,7 +562,7 @@ Najwyższy poziom izolacji, w którym transakcje są wykonywane tak, jakby były
 - Dodatkowa instalacja bazy danych na osobnym komputerze. 
 - Odtwarzanie danych na bieżąco z kopii dziennika transakcji generowanego przez główną bazę.
 - Może służyć do zapewnienia wydajności poprzez obsługę zapytań SELECT, raportów i analiz.
-- W przypadku awarii dysku lub katastrony dotyczących głównej bazy danych, rezerwowa baza danych przechodzi z trybu *stand-by* w tryb *read-write* i przejmuje obowiązki głównej bazy danych.
+- W przypadku awarii dysku lub katastrofy dotyczącej głównej bazy danych, rezerwowa baza danych przechodzi z trybu **stand-by** w tryb **read-write** i przejmuje obowiązki głównej bazy danych.
 - Może być użyta podczas prac serwisowych nad główną bazą.
 
 ---
