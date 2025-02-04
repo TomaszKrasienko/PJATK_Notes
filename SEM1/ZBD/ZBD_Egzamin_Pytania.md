@@ -374,7 +374,7 @@ Baza danych nie skanuje tabeli jeżeli na kolumnach do których odnosi się zapy
 ### Algorytm Nested Loops Join
 
 - Dla każdego wiersza tabeli E przeglądamy wszystkie wiersze Tabeli D
-- Stosowany gdy przez serwer, gdy rozmiar jednej z tabel jest niewielki, pozwalający zapisać ją całą w pamięci
+- Stosowany przez serwer, gdy rozmiar jednej z tabel jest niewielki, pozwalający zapisać ją całą w pamięci
 - Każda strona z wierszami z drugiej tabeli jest sprowadzana do pamięci tylko raz
 
 ### Algorytm Index Nested Loops Join
