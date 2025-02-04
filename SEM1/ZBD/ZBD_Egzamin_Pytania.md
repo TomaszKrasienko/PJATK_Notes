@@ -96,7 +96,7 @@ Metadane czyli dane o schematach obiektów bazy danych.
 
 ## 5. Wyzwalacze w bazie danych
 
-Wiązane z użyciem jednego z obiektów: tabeli, perspektywy, schematy, bazy danych.
+Wiązane z użyciem jednego z obiektów: tabeli, perspektywy, schematu, bazy danych.
 
 Wywoływane przez system przy zajściu odpowiedniego zdarzenia, które może być zdarzeniem systemowym abo realizacją na obiekcie jednej z instrukcji SQL.
 
