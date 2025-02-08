@@ -653,3 +653,92 @@ AS OF TIMESTAMP(SYSDATE - 1/24);
 - Przydatne w audycie, analizie trendów i przywracaniu danych.
 
 ---
+
+
+# Lenki Extras
+
+### 1. **Strojenie baz danych (ZBD1)**
+   - **Cel strojenia**: Poprawa wydajności bazy danych, zwiększenie przepustowości, skrócenie czasu reakcji aplikacji.
+   - **Zasady strojenia**:
+     - **Myśl globalnie, działaj lokalnie**: Nie lecz symptomów, lecz przyczyny. Unikaj drobnych optymalizacji, które mogą pogorszyć całość.
+     - **Partycjonowanie**: Rozproszenie danych w przestrzeni (geograficzne, na wielu dyskach) i w czasie (przenoszenie zadań wsadowych na okresy mniejszego obciążenia).
+     - **Inicjacja jest droga, używanie tanie**: Wykorzystuj prepared statements, pule połączeń, unikaj częstego otwierania i zamykania połączeń.
+     - **Kompromisy**: Dodanie pamięci RAM przyspiesza system, ale kosztuje. Dodanie indeksów przyspiesza zapytania, ale spowalnia modyfikacje danych.
+     - **Równoważenie obciążenia**: Rozkładaj obciążenie między klientem a serwerem. Interakcje z użytkownikiem powinny odbywać się poza transakcjami, aby uniknąć długotrwałych blokad.
+
+### 2. **Indeksy (ZBD1)**
+   - **Rodzaje indeksów**:
+     - **B+drzewo**: Zrównoważone drzewo, które dobrze sprawdza się w zapytaniach zakresowych i sortowaniach. Liście zawierają ciągi par klucz-wskaźnik, co umożliwia szybki dostęp do danych.
+     - **Indeks haszowany**: Szybki dostęp do danych w zapytaniach punktowych, ale nieefektywny w zapytaniach zakresowych. Wykorzystuje funkcję haszującą do mapowania kluczy na pozycje w tabeli.
+     - **Indeks bitmapowy**: Skuteczny w zapytaniach z wieloma warunkami logicznymi (AND, OR), ale nie nadaje się do częstych modyfikacji danych. Każda unikalna wartość klucza ma swoją mapę bitową.
+   - **Indeks pogrupowany vs niepogrupowany**:
+     - **Pogrupowany**: Tabela może mieć tylko jeden taki indeks. Rekordy o podobnych wartościach klucza są fizycznie blisko siebie. Lepszy do sortowania i zapytań zakresowych.
+     - **Niepogrupowany**: Tabela może mieć wiele takich indeksów. Nie narzuca fizycznej organizacji danych. Wskaźniki w indeksie wskazują na rekordy w tabeli.
+   - **Indeks pokrywający**: Zawiera wszystkie kolumny potrzebne w zapytaniu, co pozwala na uniknięcie dostępu do tabeli (strategia „tylko indeks”). Jest szczególnie efektywny, gdy kolumny używane w WHERE i SELECT są zawarte w indeksie.
+   - **Pielęgnacja indeksów**: Regularne odbudowywanie indeksów (np. w SQL Server) zapobiega fragmentacji i utrzymuje wydajność. W przypadku dużych tabel, indeksy mogą ulec fragmentacji, co prowadzi do spadku wydajności.
+
+### 3. **Strojenie zapytań (ZBD2)**
+   - **Optymalizacja zapytań**:
+     - **Użycie indeksów**: Unikaj operatorów arytmetycznych, funkcji (np. SUBSTR) i porównań z NULL w warunkach WHERE, ponieważ mogą uniemożliwić użycie indeksów. Alternatywnie, można użyć indeksów funkcyjnych.
+     - **Eliminacja DISTINCT**: DISTINCT jest kosztowny, ponieważ wymaga sortowania. Czasem można go uniknąć poprzez odpowiednie przeformułowanie zapytania.
+     - **Poprawa podzapytań**: Przeformułowanie podzapytań nieskorelowanych na złączenia może znacznie poprawić wydajność. Nieskorelowane podzapytania są wykonywane raz, podczas gdy skorelowane są wykonywane dla każdego rekordu.
+     - **Użycie tabel tymczasowych**: Tabele tymczasowe mogą pomóc w optymalizacji zapytań, ale ich nadużywanie może prowadzić do spadku wydajności. Tabele tymczasowe mogą „oślepiać” optymalizator, dlatego należy je używać z rozwagą.
+     - **Warunki złączenia**: Złączenia powinny być wykonywane po atrybutach liczbowych, a nie napisowych, aby uniknąć kosztownych operacji sortowania. Złączenia po atrybutach liczbowych są szybsze, ponieważ porównania liczbowe są mniej kosztowne niż porównania tekstowe.
+     - **Użycie HAVING**: HAVING powinno być używane tylko do selekcji po zagregowanych właściwościach grup. W innych przypadkach lepiej użyć WHERE. HAVING jest kosztowne, ponieważ działa na już zagregowanych danych.
+     - **Perspektywy zmaterializowane**: Perspektywy zmaterializowane przechowują wyniki zapytań, co może znacznie przyspieszyć wykonywanie częstych zapytań. Są szczególnie przydatne w systemach analitycznych, gdzie dane nie zmieniają się często.
+
+### 4. **Strojenie współbieżności (ZBD3)**
+   - **Transakcje**: Transakcja to ciąg operacji odczytu i zapisu, które powinny być wykonywane w sposób izolowany od innych transakcji. Transakcje muszą być ACID (Atomicity, Consistency, Isolation, Durability).
+   - **Poziomy izolacji**:
+     - **READ UNCOMMITTED**: Najniższy poziom izolacji, pozwala na odczytywanie niezatwierdzonych danych. Może prowadzić do „brudnych odczytów”.
+     - **READ COMMITTED**: Tylko zatwierdzone dane są widoczne. Zapobiega brudnym odczytom, ale może prowadzić do „niepowtarzalnych odczytów”.
+     - **REPEATABLE READ**: Gwarantuje, że dane odczytane w trakcie transakcji nie zmienią się. Zapobiega niepowtarzalnym odczytom, ale może prowadzić do „fantomów”.
+     - **SERIALIZABLE**: Najwyższy poziom izolacji, gwarantuje pełną szeregowalność transakcji. Zapobiega fantomom, ale może znacznie ograniczyć współbieżność.
+   - **Blokady**:
+     - **Współdzielona (S)**: Pozwala wielu transakcjom na jednoczesny odczyt danych.
+     - **Wyłączna (X)**: Tylko jedna transakcja może mieć dostęp do danych. Blokady wyłączne są używane przy zapisie.
+   - **Izolacja migawkowa (Snapshot Isolation)**: Transakcje pracują na migawce danych z momentu ich rozpoczęcia. Zmniejsza ryzyko zakleszczeń, ale może prowadzić do konfliktów aktualizacji. Jest szczególnie przydatna w systemach o wysokiej współbieżności.
+   - **Zakleszczenia**: Transakcje wzajemnie czekają na zwolnienie blokad. Aby uniknąć zakleszczeń, należy odpowiednio zarządzać kolejnością blokad. Można również użyć mechanizmów wykrywania i usuwania zakleszczeń.
+
+### 5. **Strojenie systemu operacyjnego i sprzętu (ZBD3, ZBD4)**
+   - **Bufor bazy danych**: Wielkość bufora powinna być dostosowana do rozmiaru danych. Zbyt mały bufor prowadzi do częstych odczytów z dysku, zbyt duży może powodować stronicowanie. Monitoruj stosunek trafień (hit ratio) i zwiększaj rozmiar bufora, dopóki wykres się nie spłaszczy.
+   - **RAID**: 
+     - **RAID 1 (mirroring)**: Dobre dla dzienników transakcji, zapewnia wysoką dostępność. Zapisy są synchroniczne i sekwencyjne.
+     - **RAID 5 (parity)**: Dobre dla aplikacji intensywnie czytających, ale ma negatywny wpływ na zapisy. Każdy zapis wymaga 4 operacji I/O (odczyt starej danej, odczyt starej parzystości, zapis nowej danej, zapis nowej parzystości).
+     - **RAID 10 (striping + mirroring)**: Dobre dla aplikacji intensywnie piszących. Łączy zalety RAID 0 (striping) i RAID 1 (mirroring).
+   - **Dodanie pamięci RAM**: Zwiększa rozmiar bufora bazy danych, co przyspiesza dostęp do danych. Pamięć RAM jest kluczowa dla wydajności systemu, szczególnie w systemach OLTP.
+   - **Dodanie dysków**: Dziennik transakcji powinien być na oddzielnym dysku, aby uniknąć wąskich gardeł. Pliki danych i indeksów można rozłożyć na wielu dyskach, aby zwiększyć przepustowość.
+
+### 6. **Strojenie interfejsu (ZBD4)**
+   - **Minimalizacja komunikacji między aplikacją a bazą danych**: Unikaj częstego przekraczania granicy interfejsu aplikacji. Wykorzystuj pętle i kursory z umiarem. Każde przekroczenie interfejsu aplikacji wiąże się z kosztem, dlatego należy minimalizować liczbę komunikatów.
+   - **Prepared statements**: Zmniejszają koszt kompilacji zapytań, szczególnie gdy zapytanie jest wykonywane wielokrotnie. Prepared statements pozwalają na ponowne wykorzystanie planów wykonania, co przyspiesza wykonywanie zapytań.
+   - **Masowe ładowanie danych**: Wykorzystuj narzędzia do masowego ładowania danych, które omijają procesor zapytań i menedżera składowania, co znacznie przyspiesza operacje. Masowe ładowanie danych może być nawet o rzędy wielkości szybsze niż tradycyjne wstawianie rekordów.
+   - **Pobieranie tylko potrzebnych danych**: Unikaj przesyłania niepotrzebnych kolumn i wierszy, co może uniemożliwić użycie indeksów pokrywających. Przesyłaj tylko te dane, które są rzeczywiście potrzebne użytkownikowi.
+
+### 7. **Monitorowanie wydajności (ZBD4)**
+   - **Cele monitorowania**: Identyfikacja wąskich gardeł, optymalizacja parametrów bazy danych, zapobieganie problemom wydajnościowym. Monitorowanie powinno być zarówno prewencyjne, jak i reakcyjne.
+   - **Narzędzia monitorowania**: 
+     - **Monitory zdarzeń** (np. SQL Server Profiler): Pozwalają na śledzenie i analizę zapytań SQL.
+     - **Monitory wydajności** (np. Performance Monitor w Windows): Pozwalają na monitorowanie wskaźników systemowych, takich jak użycie procesora, dysków i pamięci.
+     - **Tuning advisors**: Narzędzia do automatycznej optymalizacji zapytań i indeksów. Mogą sugerować zmiany w schemacie bazy danych lub w zapytaniach.
+   - **Systematyczne podejście**: Identyfikacja krytycznych zapytań, analiza planów wykonania, monitorowanie wskaźników systemowych (użycie procesora, dysków, pamięci). Krytyczne zapytania to te, które mają długi czas wykonania, są często wykonywane lub konsumują dużo zasobów.
+
+### 8. **Dane nierelacyjne i NoSQL (ZBD4)**
+   - **Dane przestrzenne**: Przechowywanie i indeksowanie danych geograficznych (punkty, linie, wieloboki). Wykorzystanie indeksów siatkowych i R-drzew. Indeksy przestrzenne pozwalają na szybkie wyszukiwanie obiektów w przestrzeni.
+   - **NoSQL**: 
+     - **Klucz-wartość**: Prosty model danych, np. Redis. Szybki dostęp do danych, ale brak zaawansowanych funkcji zapytań.
+     - **Bazy kolumnowe**: Wysoka wydajność w systemach analitycznych, np. Cassandra. Dane są przechowywane w kolumnach, co ułatwia agregacje.
+     - **Bazy dokumentowe**: Przechowywanie dokumentów JSON, np. MongoDB. Elastyczny model danych, ale brak silnej spójności.
+     - **Bazy grafowe**: Przechowywanie danych w postaci węzłów i relacji, np. Neo4J. Idealne do modelowania złożonych relacji.
+   - **Bazy danych in-memory**: Przechowywanie całej bazy danych w pamięci RAM, co znacznie przyspiesza dostęp do danych (np. TimesTen, MS SQL in-memory). Bazy in-memory są szczególnie przydatne w systemach OLTP, gdzie wymagana jest bardzo niska latencja.
+
+### 9. **Zaawansowane techniki (ZBD4)**
+   - **Temporal Tables**: Przechowywanie danych historycznych wraz z aktualnymi, co umożliwia śledzenie zmian w czasie. Temporal Tables pozwalają na łatwe odtwarzanie stanu bazy danych z dowolnego momentu w przeszłości.
+   - **Indeksy kolumnowe (Columnstore Index)**: Skuteczne w systemach analitycznych, gdzie wymagane są szybkie agregacje dużych zbiorów danych. Indeksy kolumnowe przechowują dane w kolumnach, co pozwala na efektywne kompresowanie danych i szybkie wykonywanie zapytań analitycznych.
+   - **Grafy w relacyjnych bazach danych**: MS SQL od 2017 roku wspiera przechowywanie i przetwarzanie danych w postaci grafów. Grafowe bazy danych są szczególnie przydatne w aplikacjach społecznościowych, rekomendacjach i analizie sieci.
+
+### 10. **Dodatkowe techniki i uwagi**
+   - **Denormalizacja**: W niektórych przypadkach denormalizacja schematu bazy danych może poprawić wydajność, szczególnie w systemach analitycznych, gdzie dane są często odczytywane, ale rzadko modyfikowane. Denormalizacja polega na wprowadzeniu nadmiarowości danych, aby uniknąć kosztownych złączeń.
+   - **Partycjonowanie tabel**: Partycjonowanie pozwala na rozbicie dużych tabel na mniejsze fragmenty, co może znacznie przyspieszyć wykonywanie zapytań. Partycjonowanie może być zakresowe, listowe lub haszowane.
+   - **Perspektywy zmaterializowane**: Perspektywy zmaterializowane przechowują wyniki zapytań, co może znacznie przyspieszyć wykonywanie częstych zapytań. Są szczególnie przydatne w systemach analitycznych, gdzie dane nie zmieniają się często.
+   - **Optymalizacja zapytań wsadowych**: W systemach wsadowych, gdzie wykonywane są duże ilości operacji, ważne jest optymalizowanie zapytań pod kątem minimalizacji czasu wykonania. Można to osiągnąć poprzez równoległe przetwarzanie, partycjonowanie danych i wykorzystanie narzędzi do masowego ładowania danych.
