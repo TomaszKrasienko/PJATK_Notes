@@ -139,6 +139,7 @@ CREATE TABLE Klienci (
 - Typ FILESTREAM w SQL Server
 - Przechowywane w samej bazie danych lub na zewnątrz bazy danych.
 - Na ogół w wierszu tabeli jest zapisywany tylko wskaźnik do dużego obiektu lob.
+- Mogą być trzymane w osobnych obszarach dysku jako ciąg sąsiednich stron
 
 ### Typ obiektowy XML
 
