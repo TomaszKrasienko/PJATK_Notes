@@ -406,11 +406,13 @@ Perspektywa, której wynik jest zapisywany w postaci tabeli
 
 ## 21. Optymalizacja zapytań, drzewo zapytania, plan wykonania zapytania
 
-### Plan wykonania zapytania:
-
-- drzewo wskazujące kolejność wykonywania operatorów relacyjnych przez parser
-- sposób dostępu do rekordów na dysku
-- metody realizacji operatorów relacyjnych
+- Drzewo zapytania -> parser buduje, hierarchinczna reprezentacja zapytania która pokazuje kolejność stosowania operatorów relacyjnych
+- Plan zapytania -> optymializator, instrukcja zawierająca szczegóły dotyczące sposobu realizacji zapytania przez bazę. Określa: drzewo wskazujące kolejność, sposób dostępu do rekordów na dysku, metody realizacji operatorów relacyjnych
+- Plan wykonania zapytania to kompleksowa instrukcja, która poza hierarchicznym drzewem operatorów relacyjnych, określa szczegółowo:
+    - Sposób dostępu do danych (indeksy, skanowanie tabel),
+    - Metody łączenia i przetwarzania danych (nested loops, hash join, merge join),
+    - Szacunkowe koszty operacji oraz przewidywaną liczbę przetwarzanych wierszy,
+    - Ewentualne mechanizmy równoległości.
 
 ---
 
